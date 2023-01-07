@@ -7,4 +7,4 @@
 ~ Probably gonna add more.
 
 
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/wareindustries/rise-of-nations-auto-sell/main/riseofnationsautosell.txt')))()
+```loadstring(game:HttpGet(('https://raw.githubusercontent.com/wareindustries/rise-of-nations-auto-sell/main/riseofnationsautosell.txt')))()```
