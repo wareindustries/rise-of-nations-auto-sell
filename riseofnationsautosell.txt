@@ -1,0 +1,143 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/wareindustries/orionware/main/orionwaremain')))()
+
+local Window = OrionLib:MakeWindow({Name = "UltimateWraith#1280", HidePremium = false, SaveConfig = false, ConfigFolder = "OrionTest", IntroEnabled = false})
+
+getgenv().SellElectronics = false
+
+getgenv().destroynotifications = false
+
+local NumberofResource = 1
+local priceofresource = 1
+local resourcename = "Electronics"
+
+local countryname = "None"
+
+
+
+
+function sell()
+while getgenv().SellElectronics == true do
+    task.wait()
+    for _,v in pairs(workspace.CountryData:GetChildren()) do
+        task.wait()
+        local ohString1 = v.Name
+        task.wait()
+        local ohString2 = "ResourceTrade"
+        task.wait()
+        local ohTable3 = {
+            [1] = resourcename,
+            [2] = "Sell",
+            [3] = NumberofResource,
+            [4] = priceofresource,
+            [5] = "Trade"
+        }
+        
+        workspace.GameManager.ManageAlliance:FireServer(ohString1, ohString2, ohTable3)
+        task.wait()
+    end
+        task.wait()
+        
+end
+end
+
+--game:GetService("Players").LocalPlayer.PlayerGui.GameGui.MainFrame.AlertSample:Destroy()
+
+function destroynotifications()
+    while getgenv().destroynotifications == true do
+        task.wait()
+        for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.GameGui.MainFrame:GetDescendants()) do
+            if v.Name == "AlertSample" then
+             v:Destroy()
+            end
+           end
+end
+end
+
+
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://7743875879",
+	PremiumOnly = false
+})
+
+
+Tab:AddToggle({
+    Name = "Sell Resources",
+    Default = false,
+    Callback = function(Value)
+        getgenv().SellElectronics = Value
+        if getgenv().SellElectronics == true then
+                sell()
+        end
+
+    end    
+})
+
+Tab:AddSlider({
+
+	Name = "Number of Resources",
+
+	Min = 1,
+
+	Max = 5,
+
+	Default = 1,
+
+	Color = Color3.fromRGB(67,84,147),
+	
+	Increment = 1,
+
+	Callback = function(Value)
+
+		NumberofResource = Value
+
+	end    
+
+})
+
+Tab:AddSlider({
+
+	Name = "Price of Resources",
+
+	Min = 1,
+
+	Max = 5,
+
+	Default = 1,
+
+	Color = Color3.fromRGB(67,84,147),
+	
+	Increment = 0.1,
+
+	Callback = function(Value)
+
+		priceofresource = Value
+
+	end    
+
+})
+
+Tab:AddDropdown({
+	Name = "Resource to sell",
+	Default = "Electronics",
+	Options = {"Electronics", "Consumer Goods", "Oil"},
+	Callback = function(Value)
+		resourcename = Value
+	end    
+})
+
+
+Tab:AddToggle({
+    Name = "Destroy Notifications",
+    Default = false,
+    Callback = function(Value)
+        getgenv().destroynotifications = Value
+        if getgenv().destroynotifications == true then
+                destroynotifications()
+        end
+
+    end    
+})
+
+
+
